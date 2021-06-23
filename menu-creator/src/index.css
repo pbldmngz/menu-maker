@@ -1,0 +1,150 @@
+@import url("http://fonts.googleapis.com/css?family=Lato:300,400,600");
+@import url("https://fonts.googleapis.com/css2?family=Aleo:300,400,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pridi:wght@300;400;500;600&display=swap");
+
+html {
+  background-color: #1b1b1b;
+  color: beige;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+h6 {
+  font-weight: 400;
+  font-size: 20px;
+  margin: 0px;
+  text-align: center;
+}
+
+h5 {
+  font-weight: 600;
+  font-size: 20px;
+  margin: 0px;
+  text-align: center;
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 22px;
+  margin: 0px;
+  margin-top: 2px;
+  text-align: center;
+  color: #e2b22b;
+  font-family: 'Aleo', serif;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 22px;
+  margin: 0px;
+  margin-top: 2px;
+  text-align: center;
+  color: #e2b22b;
+  font-family: 'Aleo', serif;
+}
+
+h2 {
+  font-weight: 400;
+  margin: 0px;
+  font-size: 26px;
+  text-align: center;
+}
+
+h1 {
+  font-weight: 600;
+  margin: 0px;
+  font-size: 26px;
+  text-align: center;
+}
+
+/* Navbar */
+
+.navbar {
+  background-color: #e2b22b;
+  border-radius: 12px;
+
+  margin: 10px;
+  /* text-align: center; */
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 150px;
+  margin: 5px;
+}
+
+.logo-tipo {
+  margin: 5px;
+  margin-left: 20px;
+  font-size: 48px;
+  color: #262626;
+
+  font-family: 'Pridi', serif;
+}
+
+@media screen and (max-width: 900px) {
+  .logo {
+    width: 75px;
+    margin: 5px;
+  }
+
+  .logo-tipo {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    display: none;
+  }
+}
+
+/* Menu layout */
+
+.category-container {
+  padding: 10px;
+  background-color: #262626;
+
+  padding: 10px;
+  border-radius: 12px;
+  margin: 10px;
+}
+
+.divider-solid-yellow {
+  border-top: 4px solid #e2b22b;
+  border-radius: 5px;
+  margin-top: 7px;
+  margin-bottom: 15px;
+  width: 85%;
+}
+
+.item-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  /* background-color: brown; */
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.item-name {
+  grid-column: 1/ span 2;
+  /* background-color: #e2b22b; */
+}
+
+.item-price {
+  text-align: right;
+  grid-column: 3;
+  width: 50px;
+}
+
+.item-description {
+  text-align: justify;
+  grid-column: 1/ span 2;
+  /* font-style: italic; */
+  font-weight: 200;
+  font-size: 16px;
+}
