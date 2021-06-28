@@ -1,12 +1,27 @@
 import React from 'react'
-import Logotipo from '../../images/logotipo.png'
-import Logo from '../../images/logo.png'
 
-export default function Navbar() {
+import { getByUser, getIdByName } from '../../store/actions/menuActions'
+
+import { withRouter } from "react-router";
+import { connect } from 'react-redux'
+
+function Navbar(props) {
+    const { data } = props;
+    
+
     return (
         <div className="navbar">
-            <img src={Logo} alt="Logo" className="logo"/>
-            <h1 className="logo-tipo">La Casa de la Paella</h1>
+            <img src={data ? data.logoURL : ""} alt="Logo" className="logo"/>
+            <h1 className="logo-tipo">{data ? data.name : ""}</h1>
         </div>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth,
+        profile: state.firebase.profile,
+    }
+}
+
+export default connect(mapStateToProps)(withRouter(Navbar))

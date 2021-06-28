@@ -45,10 +45,10 @@ h3 {
 }
 
 h2 {
-  font-weight: 400;
-  margin: 0px;
-  font-size: 26px;
-  text-align: center;
+  font-size: 24px;
+  /* color: #2e2e2e; */
+  font-weight: 600;
+  letter-spacing: 4px;
 }
 
 h1 {
@@ -104,12 +104,21 @@ h1 {
 /* Menu layout */
 
 .category-container {
-  padding: 10px;
   background-color: #262626;
 
-  padding: 10px;
   border-radius: 12px;
   margin: 10px;
+
+  user-select: none;
+}
+
+.category-padding {
+  padding: 15px;
+  padding-right: 0px;
+}
+
+.category-padding-full {
+  padding: 15px;
 }
 
 .divider-solid-yellow {
@@ -123,16 +132,37 @@ h1 {
 .item-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-
   /* background-color: brown; */
+}
+
+.item-container-height {
+  height: 90px;
+  overflow-y: scroll;
+}
+
+.item-container::-webkit-scrollbar {
+  display: none;
+}
+
+.item-container-height::-webkit-scrollbar{
+  display: none;
+}
+
+.item-margin-bottom {
   margin-bottom: 10px;
-  margin-right: 10px;
-  margin-left: 10px;
 }
 
 .item-name {
   grid-column: 1/ span 2;
   /* background-color: #e2b22b; */
+}
+
+.category-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
 }
 
 .item-price {
@@ -141,10 +171,184 @@ h1 {
   width: 50px;
 }
 
+.item-margin-right {
+  margin-right: 20px;
+}
+
+.color-change {
+  background-color: #2e2e2e;
+  height: 100%;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 .item-description {
   text-align: justify;
   grid-column: 1/ span 2;
   /* font-style: italic; */
   font-weight: 200;
   font-size: 16px;
+}
+
+.item-category {
+  text-align: justify;
+  grid-column: 1/ span 2;
+  /* font-style: italic; */
+  font-weight: 200;
+  font-size: 16px;
+
+  color: #e2b22b;
+}
+
+
+/* Control Panel */
+
+.grid {
+  display: grid;
+  /* background-color: aliceblue; */
+  /* grid-template-columns: repeat(4, 1fr); */
+}
+
+.panel-grid {
+  display: grid;
+  /* grid-template-columns: repeat(4, 1fr); */
+}
+
+@media screen and (min-width: 350px) {
+  .grid, .panel-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .grid, .panel-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.vertical-grid {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 5px;
+  /* background-color: #e2b22b; */
+}
+
+/* Material Icons */
+
+.big-icon {
+  font-size: 64px;
+  /* margin: 35px; */
+  /* margin: 15px; */
+}
+
+.button {
+  cursor: pointer;
+  user-select: none;
+}
+
+.button-height {
+  height: 120px;
+  overflow-y: scroll;
+}
+
+.button-height::-webkit-scrollbar{
+  display: none;
+}
+
+.panel-nav {
+  background-color: #e2b22b;
+  border-radius: 12px;
+
+  margin: 10px;
+  /* text-align: center; */
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+
+  
+}
+
+.panel-section-border {
+  border: 2px solid #e2b22b;
+  border-radius: 12px;
+
+  margin: 10px;
+  /* text-align: center; */
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+
+  /* color: #e2b22b; */
+}
+
+.panel-section {
+  background-color: #262626;
+
+  border-radius: 12px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #262626;
+  text-align: right;
+  font-weight: 200;
+  font-size: 12px;
+  padding: 1px;
+}
+
+.as-footer {
+  /* position: absolute;
+  left: 0;
+  bottom: 0; */
+  width: 100%;
+  background-color: #1b1b1b;
+}
+
+.letter-spacing {
+  letter-spacing: 3px;
+}
+
+.popup-input {
+  /* background-color: #e2b22b; */
+  -ms-box-sizing:content-box;
+  -moz-box-sizing:content-box;
+  -webkit-box-sizing:content-box; 
+  box-sizing:content-box;
+
+  /* width: 100%; */
+  border-radius: 12px;
+  padding: 5px;
+  margin-bottom: 5px;
+  width: 90%;
+
+  border: 2px solid #2b2b2b;
+  /* padding-left: 10px; */
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  text-align-last:center;
+
+  /* display: block; */
+  font-size: 20px;
+  color: black;
+  font-family: Tahoma, sans-serif;
+}
+
+.disabled {
+  background-color: burlywood;
 }
