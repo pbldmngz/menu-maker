@@ -38,47 +38,42 @@ class SignIn extends Component {
         if (auth.uid) return <Redirect to="/cpanel" />
         
         return (
-            <div className="center-box xpand white">
-                <div className="">
-                    <div className="padre-titulo">
-                        <div className="titulo">
-                            {/* <Volver /> */}
-                        </div>
-                        <div className="titulo">
-                            {/* <h2 className="titulo">##########</h2> */}
-                            {/* <img className="logo" src={Logo} alt="gst logo"></img> */}
-                        </div>
+            <div className="center-box">
+                <div className="category-container category-padding-full">
 
-                    </div>
-
-                    <form className="" onSubmit={this.handleSubmit}>
-                        <div className="form-1 white">
-                            <div className="form-2">
-
-
-                                <div className="input-field">
-                                    <label className="uname" htmlFor="email"></label>
-                                    <input onKeyDown={(e) => this.listenEnter(e)} type="email" id='email' placeholder="Correo" onChange={this.handleChange} />
-                                </div>
-                                <div className="input-field">
-                                    <label htmlFor="password"></label>
-                                    <input onKeyDown={(e) => this.listenEnter(e)} type="password" id='password' placeholder="Contraseña" onChange={this.handleChange} />
+                        <form className="" onSubmit={this.handleSubmit}>
+                            <center>
+                                <div className="popup-input panel-nav panel-section-border letter-spacing force-white-text">
+                                    LOGIN
                                 </div>
 
+                                <input
+                                    onKeyDown={(e) => this.listenEnter(e)}
+                                    type="email"
+                                    id='email'
+                                    placeholder="Correo"
+                                    onChange={this.handleChange}
+                                    className="popup-input"
+                                />
 
+                                <input
+                                    onKeyDown={(e) => this.listenEnter(e)}
+                                    type="password"
+                                    id='password'
+                                    placeholder="Contraseña"
+                                    onChange={this.handleChange}
+                                    className="popup-input"
+                                />
 
-                            </div>
-                            <div className="footer-single">
-                                {authError ? <p>{authError}</p> : null}
-                            </div>
-                            <div className="footer-single">
-                                <button
-                                    className="add-question"
-                                >Iniciar sesión</button>
-                            </div>
+                                <button className="popup-input action-button button">Sign In</button>
 
-                        </div>
-                    </form>
+                                <div className="">
+                                    {authError ? <p>{authError}</p> : null}
+                                </div>
+
+                            </center>
+                        </form>
+
                 </div>
             </div>
             

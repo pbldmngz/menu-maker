@@ -123,6 +123,41 @@ export const getCategory = (id) => {
     }
 }
 
+// Get menu config using UID
+export const getMenuConfig = (id) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+
+        const firestore = getFirestore();
+
+        var docRef = firestore.collection("menuConfig").doc(id);
+
+        return docRef.get()
+            .then((doc) => {
+                if (doc.exists) {
+                    return doc.data()
+                }
+            }).catch((err) => {
+                console.log(err)
+            });
+    }
+}
+
+export const editMenuConfig = (id, obj) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+
+        const firestore = getFirestore();
+
+        firestore.collection("menuConfig").doc(id).update({
+            ...obj,
+        }).then(() => {
+            dispatch({ type: "EDIT_MENU_CONFIG" }, obj)
+        }).catch((err) => {
+            dispatch({ type: "EDIT_MENU_CONFIG_ERROR" }, err)
+        })
+
+    }
+}
+
 // get Menu config by using the directory path
 export const getIdByName = (name) => {
 

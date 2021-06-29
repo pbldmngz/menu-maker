@@ -42,68 +42,57 @@ class SignUp extends Component {
         // if (!lang) return null;
 
         return (
-            <div className="">
-                <div className="padre-titulo mobile">
-                    <div className="titulo destroy-on-mobile">
-                    </div>
-                    <div className="titulo">
-                        <h2 className="titulo">Registrar</h2>
-                    </div>
+            <div className="center-box">
+                <div className="category-container category-padding-full">
+                    <form className="" onSubmit={this.handleSubmit}>
 
-                </div>
-                <div className="form-1">
-                    <div className="form-2">
-                        <form className="" onSubmit={this.handleSubmit}>
-                            <div className="input-field">
-                                <label htmlFor="nombre"></label>
-                                <input
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    spellCheck="off"
-                                    type="email"
-                                    id='nombre'
-                                    placeholder="Nombre"
-                                    onChange={this.handleChange}
-                                />
+                        <center>
+                            <div className="popup-input panel-nav panel-section-border letter-spacing force-white-text">
+                                REGISTER
                             </div>
-                            
-                            <div className="input-field">
-                                <label htmlFor="email"></label>
-                                <input
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    spellCheck="off"
-                                    type="email"
-                                    id='email'
-                                    placeholder="Correo"
-                                    onChange={this.handleChange}
-                                />
+                            <input
+                                autoComplete="off"
+                                autoCorrect="off"
+                                spellCheck="off"
+                                type="text"
+                                id='nombre'
+                                placeholder="Nombre"
+                                onChange={this.handleChange}
+                                className="popup-input"
+                            />
+
+                            <input
+                                autoComplete="off"
+                                autoCorrect="off"
+                                spellCheck="off"
+                                type="email"
+                                id='email'
+                                placeholder="Correo"
+                                onChange={this.handleChange}
+                                className="popup-input"
+                            />
+
+                            <input
+                                autoComplete="off"
+                                autoCorrect="off"
+                                spellCheck="off"
+                                type="password"
+                                id='password'
+                                placeholder="Contraseña"
+                                onChange={this.handleChange}
+                                className="popup-input"
+                            />
+
+                            <button className="popup-input action-button button">Sign Up</button>
+
+                            <div className="">
+                                {authError ? <p>{authError}</p> : null}
                             </div>
-                            <div className="input-field">
-                                <label htmlFor="password"></label>
-                                <input 
-                                    autoComplete="off"
-                                    autoCorrect="off"
-                                    spellCheck="off"
-                                    type="password"
-                                    id='password'
-                                    placeholder="Contraseña"
-                                    onChange={this.handleChange} 
-                                />
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div className="footer-single margin-top">
-                    <button 
-                        onClick={this.handleSubmit}
-                        className="add-question">Registrar</button>
-                </div>
-                <div className="footer-single">
-                    {authError ? <p>{authError}</p> : null}
+                        </center>
+
+                    </form>
                 </div>
             </div>
-            
         )
     }
 }

@@ -3,8 +3,24 @@ import { signOut } from '../../store/actions/authActions'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router';
 
+import { getMenuConfig } from '../../store/actions/menuActions'
+
 
 class Panel extends Component {
+
+    componentDidMount() {
+        const { authError, auth } = this.props;
+        if (auth.uid) {
+            this.props.getMenuConfig(auth.uid).then((res) => {
+                this.setState({
+                    menuLink: "/menu/" + res.path,
+                    config: res,
+                })
+            })
+        }
+    }
+
+
     render() {
 
         const { authError, auth } = this.props;
@@ -18,8 +34,8 @@ class Panel extends Component {
                 </div>
 
                 <div className="as-footer">
-                    <div className=" panel-section-border button disabled" onClick={() => {
-                        this.props.history.push("/menu/" + "rimuru")
+                    <div className=" panel-section-border button" onClick={() => {
+                        this.props.history.push(this.state.menuLink)
                     }}>
                         Go to your menu
                     </div>
@@ -41,22 +57,7 @@ class Panel extends Component {
                             Items
                         </div>
                     </div>
-                    <div className="panel-section">
-                        <div className="panel-nav panel-section-border letter-spacing">
-                            USER
-                        </div>
-                        <div className="panel-section-border disabled">
-                            Share link
-                        </div>
-                        <div className="panel-section-border disabled">
-                            Disable ads
-                        </div>
-                        <div className="panel-section-border button" onClick={() => {
-                            this.props.signOut();
-                        }}>
-                            Log out
-                        </div>
-                    </div>
+                    
                     <div className="panel-section">
                         <div className="panel-nav panel-section-border letter-spacing">
                             SETTINGS
@@ -75,6 +76,26 @@ class Panel extends Component {
                             Change brand logo
                         </div>
                     </div>
+
+                    <div className="panel-section">
+                        <div className="panel-nav panel-section-border letter-spacing">
+                            USER
+                        </div>
+                        <div className="panel-section-border disabled">
+                            Share link
+                        </div>
+                        <div className="panel-section-border disabled delete">
+                            Disable ads
+                        </div>
+                        <div className="panel-section-border disabled">
+                            Change language
+                        </div>
+                        <div className="panel-section-border button" onClick={() => {
+                            this.props.signOut();
+                        }}>
+                            Log out
+                        </div>
+                    </div>
                 </div>
             </div>
         )
@@ -91,7 +112,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signOut: () => dispatch(signOut())
+        signOut: () => dispatch(signOut()),
+        getMenuConfig: (id) => dispatch(getMenuConfig(id)),
     }
 }
 

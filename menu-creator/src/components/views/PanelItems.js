@@ -47,7 +47,7 @@ class PanelItems extends Component {
         var fullHTML = '';
 
         if (title !== "items") {
-            fullHTML = `<input type="text" id="cat_name" class="popup-input" placeholder="Name" value="${obj ? obj.name : "Name"}" />`;
+            fullHTML = `<input type="text" id="cat_name" class="popup-input" placeholder="Name" value="${obj ? obj.name : ""}" />`;
         } else {
             fullHTML += `<input type="text" id="p_name" class="popup-input" placeholder="Name" value="${obj ? obj.name : ""}" />`;
             fullHTML += `<input type="text" id="p_price" class="popup-input" placeholder="Price" value="${obj ? obj.price : ""}" />`;
@@ -214,7 +214,24 @@ class PanelItems extends Component {
                                                 edit
                                             </span>
                                             <span className="material-icons button" onClick={() => {
-                                                this.delete(title, obj.id)
+                                                Swal.fire({
+                                                    title: 'Are you sure?',
+                                                    text: "You won't be able to revert this!",
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#3085d6',
+                                                    cancelButtonColor: '#d33',
+                                                    confirmButtonText: 'Yes, delete it!'
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        this.delete(title, obj.id)
+                                                        Swal.fire(
+                                                            'Deleted!',
+                                                            'Your item has been deleted.',
+                                                            'success'
+                                                        )
+                                                    }
+                                                })
                                             }}>
                                                 delete
                                             </span>

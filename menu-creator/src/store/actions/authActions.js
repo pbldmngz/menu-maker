@@ -48,6 +48,10 @@ export const signUp = (newUser) => {
                 logoURL: "https://chaitanyahr.com/wp-content/uploads/2015/02/logo_dummy.png",
             });
 
+            firestore.collection('language').doc(resp.user.uid).set({
+                lang: "en",
+            });
+
             return firestore.collection('users').doc(resp.user.uid).set({
                 name: newUser.nombre,
                 subscribed: false,

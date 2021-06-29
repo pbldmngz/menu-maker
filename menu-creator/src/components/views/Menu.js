@@ -20,21 +20,25 @@ class Menu extends Component {
 
         if (match.params.userID) {
             getIdByName(match.params.userID).then((arr) => {
-                getByUser("items", arr[0].id).then((res) => {
-                    this.setState({
-                        items: res
+                if (arr.length > 0) {
+                    getByUser("items", arr[0].id).then((res) => {
+                        this.setState({
+                            items: res
+                        })
                     })
-                })
 
-                getByUser("categories", arr[0].id).then((res) => {
-                    this.setState({
-                        categories: res
+                    getByUser("categories", arr[0].id).then((res) => {
+                        this.setState({
+                            categories: res
+                        })
                     })
-                })
 
-                this.setState({
-                    menuData: arr[0],
-                })
+                    this.setState({
+                        menuData: arr[0],
+                    })
+                } else {
+                    this.props.history.push("/404")
+                }
             });
         }
     }

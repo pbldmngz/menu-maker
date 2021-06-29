@@ -58,6 +58,12 @@ h1 {
   text-align: center;
 }
 
+.center-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Navbar */
 
 .navbar {
@@ -214,6 +220,10 @@ h1 {
   /* grid-template-columns: repeat(4, 1fr); */
 }
 
+.form-width {
+  width: 40%;
+}
+
 @media screen and (min-width: 350px) {
   .grid, .panel-grid {
     grid-template-columns: repeat(1, 1fr);
@@ -252,6 +262,19 @@ h1 {
   user-select: none;
 }
 
+.action-button {
+  /* background-color: #e2b22b; */
+  border: 2px solid #e2b22b !important;
+  background-color: #262626;
+
+  color: white !important;
+  margin-top: 15px;
+}
+
+.force-white-text {
+  color: white !important;
+}
+
 .button-height {
   height: 120px;
   overflow-y: scroll;
@@ -272,8 +295,6 @@ h1 {
   justify-content: center;
   align-items: center;
   padding: 5px;
-
-  
 }
 
 .panel-section-border {
@@ -351,4 +372,8 @@ h1 {
 
 .disabled {
   background-color: burlywood;
+}
+
+.delete {
+  display: none;
 }
