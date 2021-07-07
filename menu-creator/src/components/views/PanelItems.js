@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Swal from "sweetalert2";
+import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import {
     getByUser,
+    getMenuConfig,
     createItem,
     editItem,
     deleteItem,
@@ -15,24 +18,27 @@ import {
 
 class PanelItems extends Component {
 
-    state = {
-        items: [],
-        categories: [],
-    }
-
     fetchData = () => {
-        const { auth, getByUser } = this.props;
+        const { auth, getByUser, getMenuConfig } = this.props;
 
         if (auth.uid) {
-            getByUser("items", auth.uid).then((res) => {
+
+            getMenuConfig(auth.uid).then((res) => {
+                console.log("state/config", res)
                 this.setState({
-                    items: res
+                    config: res,
                 })
             })
-
+            
             getByUser("categories", auth.uid).then((res) => {
                 this.setState({
                     categories: res
+                })
+            })
+
+            getByUser("items", auth.uid).then((res) => {
+                this.setState({
+                    items: res
                 })
             })
         }
@@ -249,24 +255,60 @@ class PanelItems extends Component {
 
     render() {
 
-        const { uid } = this.props;
+        const { auth } = this.props;
+        // Config
+        if (!auth.uid) return <Redirect to="/auth/login" />
+
+        if (!this.state) return null
+        const { colorPalette } = this.state.config;
+        // Config
+
         const { items, categories } = this.state
         const { title } = this.props.match.params
 
         if (!["items", "categories"].includes(title)) return null
 
+        const styles = {
+            title: {
+                backgroundColor: colorPalette.header,
+                color: colorPalette.text,
+            },
+            header: {
+                backgroundColor: colorPalette.header,
+                borderColor: colorPalette.header,
+                color: colorPalette.text,
+            },
+            button: {
+                borderColor: colorPalette.header,
+                backgroundColor: colorPalette.category,
+                color: colorPalette.text,
+            },
+            fill: {
+                backgroundColor: colorPalette.background,
+            },
+            category: {
+                backgroundColor: colorPalette.category,
+            },
+            background: {
+                backgroundColor: colorPalette.background,
+                overflow: "scroll",
+            }
+        }
+
         return (
-            <div>
-                <div className="panel-nav">
+            <div className="overall animation" style={styles.background}>
+                <div className="panel-nav" style={styles.title}>
                     <h2>CONTROL PANEL / {title.toUpperCase()}</h2>
                 </div>
 
                 <div className="as-footer">
-                    <div className=" panel-section-border button" onClick={() => {
-                        this.props.history.push("/cpanel")
-                    }}>
+                    <Link 
+                        to={"/cpanel"}
+                        className="panel-section-border button"
+                        style={styles.button}
+                    >
                         Go back to Control Panel
-                    </div>
+                    </Link>
                 </div>
                 
                 {this.getCards(title, (title === "items" ? items : categories))}
@@ -291,6 +333,7 @@ const mapDispatchtoProps = (dispatch) => {
         createCategory: (category) => dispatch(createCategory(category)),
         editCategory: (id, obj) => dispatch(editCategory(id, obj)),
         deleteCategory: (id) => dispatch(deleteCategory(id)),
+        getMenuConfig: (id) => dispatch(getMenuConfig(id)),
     }
 }
 

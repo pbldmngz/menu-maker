@@ -89,7 +89,7 @@ class Menu extends Component {
         const testItems = this.separateCategories(this.state.items)
 
         return (
-            <div>
+            <div className="animation">
                 <Navbar data={this.state.menuData}/>
                 <ResponsiveMasonry
                     columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
