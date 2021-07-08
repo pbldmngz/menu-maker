@@ -1,14 +1,14 @@
 
 
 const CategoryItems = (props) => {
-    const {items} = props;
+    const { items, category, separator } = props;
 
     return (
-        <div className="category-container category-padding-full">
+        <div className="category-container category-padding-full" style={category}>
 
-            <h4>{items.title}</h4>
+            <h4 style={separator}>{items.title}</h4>
             <center>
-                <div className="divider-solid-yellow" />
+                <div className="divider-solid-yellow" style={separator}/>
             </center>
             
             {items && items.data.map((obj, index) => {

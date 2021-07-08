@@ -10,10 +10,7 @@ import Footer from './Footer';
 
 class Menu extends Component {
 
-    state = {
-        items: [],
-        categories: [],
-    }
+    state = {}
 
     fetchData = () => {
         const { match, getByUser, getIdByName } = this.props;
@@ -21,11 +18,6 @@ class Menu extends Component {
         if (match.params.userID) {
             getIdByName(match.params.userID).then((arr) => {
                 if (arr.length > 0) {
-                    getByUser("items", arr[0].id).then((res) => {
-                        this.setState({
-                            items: res
-                        })
-                    })
 
                     getByUser("categories", arr[0].id).then((res) => {
                         this.setState({
@@ -33,8 +25,14 @@ class Menu extends Component {
                         })
                     })
 
+                    getByUser("items", arr[0].id).then((res) => {
+                        this.setState({
+                            items: res
+                        })
+                    })
+
                     this.setState({
-                        menuData: arr[0],
+                        config: arr[0],
                     })
                 } else {
                     this.props.history.push("/404")
@@ -86,23 +84,71 @@ class Menu extends Component {
     }
 
     render() {
-        const testItems = this.separateCategories(this.state.items)
+        if (JSON.stringify(Object.keys(this.state)) === JSON.stringify(["config", "categories", "items"])){
+            const testItems = this.separateCategories(this.state.items);
+            const { colorPalette } = this.state.config;
+        // Config
 
-        return (
-            <div className="animation">
-                <Navbar data={this.state.menuData}/>
-                <ResponsiveMasonry
-                    columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
-                >
-                    <Masonry>
-                        {testItems && testItems.map((items, index) => {
-                            return <CategoryItems key={index} items={items} />
-                        })}
-                    </Masonry>
-                </ResponsiveMasonry>
-                <Footer />
-            </div>
-        )
+            const styles = {
+                title: {
+                    backgroundColor: colorPalette.header,
+                    color: colorPalette.text,
+                },
+                header: {
+                    backgroundColor: colorPalette.header,
+                    borderColor: colorPalette.header,
+                    color: colorPalette.text,
+                },
+                button: {
+                    borderColor: colorPalette.header,
+                    backgroundColor: colorPalette.category,
+                    color: colorPalette.text,
+                },
+                fill: {
+                    backgroundColor: colorPalette.background,
+                },
+                category: {
+                    backgroundColor: colorPalette.category,
+                    color: colorPalette.text,
+                },
+                background: {
+                    backgroundColor: colorPalette.background,
+                    overflow: "scroll",
+                },
+                separator: {
+                    color: colorPalette.header,
+                    borderColor: colorPalette.header,
+                }
+            }
+            return (
+                <div className="overall animation" style={styles.background}>
+                    <Navbar data={this.state.config} style={styles.title}/>
+                    <ResponsiveMasonry
+                        columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+                    >
+                        <Masonry>
+                            {testItems && testItems.map((items, index) => {
+                                return <CategoryItems
+                                    key={index}
+                                    items={items}
+                                    category={styles.category}
+                                    separator={styles.separator}
+                                    />
+                            })}
+                        </Masonry>
+                    </ResponsiveMasonry>
+                    <Footer />
+                </div>
+            )
+
+        } else {
+            return null
+        }
+        
+        
+
+
+        
     }
 }
 

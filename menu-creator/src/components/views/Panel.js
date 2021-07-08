@@ -112,6 +112,12 @@ class Panel extends Component {
             background: {
                 backgroundColor: colorPalette.background,
                 overflow: "scroll",
+            },
+            all: {
+                highlight: colorPalette.header,
+                text: colorPalette.text,
+                container: colorPalette.category,
+                background: colorPalette.background,
             }
         }
 
@@ -179,11 +185,6 @@ class Panel extends Component {
                             Change brand logo
                         </div>
                         {/* This should be done in a separate page */}
-                        <div className="panel-section-border disabled"
-                            style={styles.button}
-                        >
-                            Change color palette
-                        </div>
                     </div>
 
                     <div className="panel-section" style={styles.category}>
@@ -215,6 +216,36 @@ class Panel extends Component {
                             Log out
                         </div>
                     </div>
+
+                    <div className="panel-section" style={styles.category}>
+                        <div className="panel-nav panel-section-border letter-spacing" style={styles.header}>
+                            COLORS
+                        </div>
+                        <div className="panel-grid">
+                            <div className="panel-section-border button"
+                                style={{ backgroundColor: styles.all.background, border: "1px dashed #eeeeee25" }}
+                            >
+                                <div style={{ mixBlendMode: "difference" }}>Background</div>
+                            </div>
+                            <div className="panel-section-border button"
+                                style={{ backgroundColor: styles.all.container, border: "1px dashed #eeeeee25" }}
+                            >
+                                <div style={{ mixBlendMode: "difference" }}>Container</div>
+                            </div>
+                            <div className="panel-section-border button"
+                                style={{ backgroundColor: styles.all.highlight, border: "1px dashed #eeeeee25" }}
+                            >
+                                <div style={{ mixBlendMode: "difference" }}>Highlight</div>
+                            </div>
+                            <div className="panel-section-border button"
+                                style={{ backgroundColor: styles.all.text, border: "1px dashed #eeeeee25" }}
+                            >
+                                <div style={{ mixBlendMode: "difference" }}>Text</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
                 </div>
             </div>
         )

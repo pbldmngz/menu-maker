@@ -6,11 +6,11 @@ import { withRouter } from "react-router";
 import { connect } from 'react-redux'
 
 function Navbar(props) {
-    const { data } = props;
+    const { data, style } = props;
     
 
     return (
-        <div className="navbar">
+        <div className="navbar" style={style}>
             <img src={data ? data.logoURL : ""} alt="Logo" className="logo"/>
             <h1 className="logo-tipo">{data ? data.name : ""}</h1>
         </div>
