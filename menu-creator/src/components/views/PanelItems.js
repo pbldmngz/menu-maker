@@ -270,29 +270,29 @@ class PanelItems extends Component {
 
         const styles = {
             title: {
-                backgroundColor: colorPalette.header,
+                backgroundColor: colorPalette.highlight,
                 color: colorPalette.text,
             },
             header: {
-                backgroundColor: colorPalette.header,
-                borderColor: colorPalette.header,
+                backgroundColor: colorPalette.highlight,
+                borderColor: colorPalette.highlight,
                 color: colorPalette.text,
             },
             button: {
-                borderColor: colorPalette.header,
-                backgroundColor: colorPalette.category,
+                borderColor: colorPalette.highlight,
+                backgroundColor: colorPalette.container,
                 color: colorPalette.text,
             },
             fill: {
                 backgroundColor: colorPalette.background,
             },
             category: {
-                backgroundColor: colorPalette.category,
+                backgroundColor: colorPalette.container,
             },
             background: {
                 backgroundColor: colorPalette.background,
                 overflow: "scroll",
-            }
+            },
         }
 
         return (

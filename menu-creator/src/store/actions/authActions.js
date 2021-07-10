@@ -36,11 +36,9 @@ export const signUp = (newUser) => {
 
             firestore.collection('menuConfig').doc(resp.user.uid).set({
                 colorPalette: {
-                    header: "#e2b22b",
-                    title: "#262626",
-                    blockTitle: "#e2b22b",
+                    highlight: "#e2b22b",
                     background: "#1b1b1b",
-                    category: "#262626",
+                    container: "#262626",
                     text: "beige",
                 },
                 name: "default",

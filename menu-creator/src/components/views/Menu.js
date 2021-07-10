@@ -91,25 +91,24 @@ class Menu extends Component {
 
             const styles = {
                 title: {
-                    backgroundColor: colorPalette.header,
-                    color: colorPalette.text,
+                    backgroundColor: colorPalette.highlight,
+                    color: colorPalette.background,
                 },
                 header: {
-                    backgroundColor: colorPalette.header,
-                    borderColor: colorPalette.header,
+                    backgroundColor: colorPalette.highlight,
+                    borderColor: colorPalette.highlight,
                     color: colorPalette.text,
                 },
                 button: {
-                    borderColor: colorPalette.header,
-                    backgroundColor: colorPalette.category,
+                    borderColor: colorPalette.highlight,
+                    backgroundColor: colorPalette.container,
                     color: colorPalette.text,
                 },
                 fill: {
                     backgroundColor: colorPalette.background,
                 },
                 category: {
-                    backgroundColor: colorPalette.category,
-                    color: colorPalette.text,
+                    backgroundColor: colorPalette.container,
                 },
                 background: {
                     backgroundColor: colorPalette.background,
@@ -122,7 +121,7 @@ class Menu extends Component {
             }
             return (
                 <div className="overall animation" style={styles.background}>
-                    <Navbar data={this.state.config} style={styles.title}/>
+                    <Navbar data={this.state.config} navbar={styles.title}/>
                     <ResponsiveMasonry
                         columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
                     >

@@ -4,11 +4,25 @@ import { signOut } from '../../store/actions/authActions'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router';
 import Swal from "sweetalert2";
+import { HexColorPicker, HexColorInput } from "react-colorful";
+import Modal from 'react-modal';
 
 import { getMenuConfig, editMenuConfig } from '../../store/actions/menuActions'
 
+Modal.setAppElement('#root');
 
 class Panel extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            modal: false,
+            mode: "background",
+        };
+
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
 
     componentDidMount() {
         this.fetchData()
@@ -77,12 +91,27 @@ class Panel extends Component {
         });
     }
 
+    openModal(mode) {
+        this.setState({
+            modal: true,
+            mode: mode
+        })
+    }
+
+
+    closeModal() {
+        this.setState({
+            modal: false,
+        })
+    }
+
 
     render() {
 
         const { auth } = this.props;
 
         if (!this.state) return null
+        if (!this.state.config) return null
 
         const { colorPalette } = this.state.config;
 
@@ -90,35 +119,74 @@ class Panel extends Component {
 
         const styles = {
             title: {
-                backgroundColor: colorPalette.header,
+                backgroundColor: colorPalette.highlight,
                 color: colorPalette.text,
             },
             header: {
-                backgroundColor: colorPalette.header,
-                borderColor: colorPalette.header,
+                backgroundColor: colorPalette.highlight,
+                borderColor: colorPalette.highlight,
                 color: colorPalette.text,
             },
             button: {
-                borderColor: colorPalette.header,
-                backgroundColor: colorPalette.category,
+                borderColor: colorPalette.highlight,
+                backgroundColor: colorPalette.container,
                 color: colorPalette.text,
             },
             fill: {
                 backgroundColor: colorPalette.background,
             },
             category: {
-                backgroundColor: colorPalette.category,
+                backgroundColor: colorPalette.container,
             },
             background: {
                 backgroundColor: colorPalette.background,
                 overflow: "scroll",
             },
             all: {
-                highlight: colorPalette.header,
+                highlight: colorPalette.highlight,
                 text: colorPalette.text,
-                container: colorPalette.category,
+                container: colorPalette.container,
                 background: colorPalette.background,
             }
+        }
+
+        var colorPicker = {
+            highlight: colorPalette.highlight,
+            text: colorPalette.text,
+            container: colorPalette.container,
+            background: colorPalette.background,
+        }
+
+        const handleChangeModal = (color) => {
+            colorPicker[this.state.mode] = color
+        }
+
+        const closeModalOK = () => {
+            this.setState({
+                modal: false,
+            });
+
+            this.props.editMenuConfig(auth.uid, {
+                colorPalette: {
+                    ...this.state.config.colorPalette,
+                    [this.state.mode]: colorPicker[this.state.mode]
+                }
+            });
+
+            this.fetchData();
+        }
+
+        const resetColors = () => {
+            this.props.editMenuConfig(auth.uid, {
+                colorPalette: {
+                    highlight: "#e2b22b",
+                    background: "#1b1b1b",
+                    container: "#262626",
+                    text: "beige",
+                }
+            });
+            
+            this.fetchData();
         }
 
         return (
@@ -224,29 +292,54 @@ class Panel extends Component {
                         <div className="panel-grid">
                             <div className="panel-section-border button"
                                 style={{ backgroundColor: styles.all.background, border: "1px dashed #eeeeee25" }}
+                                onClick={() => this.openModal("background")}
                             >
                                 <div style={{ mixBlendMode: "difference" }}>Background</div>
                             </div>
                             <div className="panel-section-border button"
                                 style={{ backgroundColor: styles.all.container, border: "1px dashed #eeeeee25" }}
+                                onClick={() => this.openModal("container")}
                             >
                                 <div style={{ mixBlendMode: "difference" }}>Container</div>
                             </div>
                             <div className="panel-section-border button"
                                 style={{ backgroundColor: styles.all.highlight, border: "1px dashed #eeeeee25" }}
+                                onClick={() => this.openModal("highlight")}
                             >
                                 <div style={{ mixBlendMode: "difference" }}>Highlight</div>
                             </div>
                             <div className="panel-section-border button"
                                 style={{ backgroundColor: styles.all.text, border: "1px dashed #eeeeee25" }}
+                                onClick={() => this.openModal("text")}
                             >
                                 <div style={{ mixBlendMode: "difference" }}>Text</div>
                             </div>
                         </div>
-                        
+                        <div className="panel-section-border button"
+                            style={styles.button}
+                            onClick={resetColors}>
+                            Reset colors
+                        </div>
                     </div>
-
                 </div>
+                <Modal
+                    isOpen={this.state.modal}
+                    onRequestClose={() => this.closeModal()}
+                    contentLabel="Color Picker"
+                    className="Modal"
+                    overlayClassName="Overlay"
+                >
+                    <center>
+                        <HexColorInput className="popup-input" color={colorPicker[this.state.mode]} onChange={handleChangeModal} />
+                        <div className="marginator">
+                            <HexColorPicker color={colorPicker[this.state.mode]} onChange={handleChangeModal} />
+                        </div>
+                        <div className="panel-grid">
+                            <button className="popup-input" onClick={closeModalOK}>OK</button>
+                            <button className="popup-input cancel" onClick={this.closeModal}>Cancel</button>
+                        </div>
+                    </center>
+                </Modal>
             </div>
         )
     }

@@ -31,7 +31,7 @@ a:hover, a:visited, a:link, a:active
 }
 
 body {
-  /* background-color: #1b1b1b; */
+  background-color: #1b1b1b;
   /* background-color: brown; */
   /* background-color: whitesmoke; */
   color: beige;
@@ -118,7 +118,7 @@ h1 {
   margin: 5px;
   margin-left: 20px;
   font-size: 48px;
-  color: #262626;
+  /* color: #262626; */
 
   font-family: 'Pridi', serif;
 }
@@ -444,4 +444,36 @@ h1 {
 @-o-keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
+}
+
+.Modal {
+  position: absolute;
+  background-color: #262626;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.marginator {
+  margin: 15px;
+}
+
+.cancel {
+  background-color: brown;
+  color: white;
 }
