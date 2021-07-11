@@ -13,13 +13,16 @@ import {
     createCategory,
     editCategory,
     deleteCategory,
+    getLanguage,
 } from '../../store/actions/menuActions'
+
+import { dText } from '../../config/language'
 
 
 class PanelItems extends Component {
 
     fetchData = () => {
-        const { auth, getByUser, getMenuConfig } = this.props;
+        const { auth, getByUser, getMenuConfig, getLanguage } = this.props;
 
         if (auth.uid) {
 
@@ -41,6 +44,12 @@ class PanelItems extends Component {
                     items: res
                 })
             })
+
+            getLanguage(auth.uid).then((res) => {
+                this.setState({
+                    ...res
+                })
+            });
         }
     }
 
@@ -49,17 +58,20 @@ class PanelItems extends Component {
     }
 
     popup = (title, obj = undefined) => {
+        const { lang } = this.state;
+        if (!lang) return null;
+        const dT = dText[lang];
 
         var fullHTML = '';
 
         if (title !== "items") {
-            fullHTML = `<input type="text" id="cat_name" class="popup-input" placeholder="Name" value="${obj ? obj.name : ""}" />`;
+            fullHTML = `<input type="text" id="cat_name" class="popup-input" placeholder="${dT.a_name}" value="${obj ? obj.name : ""}" />`;
         } else {
-            fullHTML += `<input type="text" id="p_name" class="popup-input" placeholder="Name" value="${obj ? obj.name : ""}" />`;
-            fullHTML += `<input type="text" id="p_price" class="popup-input" placeholder="Price" value="${obj ? obj.price : ""}" />`;
+            fullHTML += `<input type="text" id="p_name" class="popup-input" placeholder="${dT.a_name}" value="${obj ? obj.name : ""}" />`;
+            fullHTML += `<input type="text" id="p_price" class="popup-input" placeholder="${dT.a_price}" value="${obj ? obj.price : ""}" />`;
 
             var options = (
-                '<option class="popup-input" value="" disabled selected hidden>Select category</option>'
+                `<option class="popup-input" value="" disabled selected hidden>${dT.a_category}</option>`
             )
 
             for (let cat of this.state.categories) {
@@ -72,15 +84,15 @@ class PanelItems extends Component {
 
             fullHTML += `<select class="popup-input" id="p_category">` + options + '</select>';
 
-            fullHTML += `<input type="text" id="p_description" class="popup-input" placeholder="Description" value="${obj ? obj.description : ""}" />`;
+            fullHTML += `<input type="text" id="p_description" class="popup-input" placeholder="${dT.a_desc}" value="${obj ? obj.description : ""}" />`;
         }
 
         Swal.fire({
-            title: `${obj ? "Edit" : "Add"} ${title}`,
+            title: `${obj ? dT.edit : dT.add} ${dT[title.toLowerCase()].toLowerCase()}`,
 
             html: fullHTML,
             
-            confirmButtonText: obj ? "Save" : "Add",
+            confirmButtonText: obj ? dT.save : dT.add,
             focusConfirm: false,
             preConfirm: () => {
                 if (title === "items") {
@@ -124,7 +136,7 @@ class PanelItems extends Component {
 
                 console.log("Should be before")
 
-                Swal.fire(`"${result.value.name}" ${obj ? "edited" : "added"}!`.trim())
+                Swal.fire(`"${result.value.name}" ${obj ? dT.edited : dT.added}!`.trim())
             }
         }).catch((error) => {
             console.log("Error in swal2", error)
@@ -171,13 +183,17 @@ class PanelItems extends Component {
         this.fetchData()
     }
 
-    getCards = (title, data) => {
+    getCards = (title, data, styles) => {
+        const { lang } = this.state;
+        if (!lang) return null;
+        const dT = dText[lang];
+
         return (
-            <div className="grid">
+            <div className="grid" style={styles.text}>
                 <div className="category-container button button-height" onClick={() => {
                     this.popup(title)
                 }}>
-                    <div className="category-center">
+                    <div className="category-center" style={styles.category}>
                         {
                             (title === "items") ?
                                 (<div className="material-icons big-icon">post_add</div>) :
@@ -185,9 +201,9 @@ class PanelItems extends Component {
                         }
                     </div>
                 </div>
-                {data && data.map((obj) => {
+                {data && data.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1).map((obj) => {
                     return (
-                        <div key={obj.id} className="category-container category-padding">
+                        <div key={obj.id} className="category-container category-padding" style={ styles.category }>
                             <div className="item-container">
                                 {title === "items" ? (
                                     <div className="item-name">
@@ -221,19 +237,19 @@ class PanelItems extends Component {
                                             </span>
                                             <span className="material-icons button" onClick={() => {
                                                 Swal.fire({
-                                                    title: 'Are you sure?',
-                                                    text: "You won't be able to revert this!",
+                                                    title: dT.you_sure,
+                                                    text: dT.no_revert,
                                                     icon: 'warning',
                                                     showCancelButton: true,
                                                     confirmButtonColor: '#3085d6',
                                                     cancelButtonColor: '#d33',
-                                                    confirmButtonText: 'Yes, delete it!'
+                                                    confirmButtonText: dT.yes_delete,
                                                 }).then((result) => {
                                                     if (result.isConfirmed) {
                                                         this.delete(title, obj.id)
                                                         Swal.fire(
-                                                            'Deleted!',
-                                                            'Your item has been deleted.',
+                                                            dT.deleted,
+                                                            dT.del_info,
                                                             'success'
                                                         )
                                                     }
@@ -261,6 +277,9 @@ class PanelItems extends Component {
 
         if (!this.state) return null
         const { colorPalette } = this.state.config;
+
+        const { lang } = this.state;
+        if (!lang) return null;
         // Config
 
         const { items, categories } = this.state
@@ -293,26 +312,32 @@ class PanelItems extends Component {
                 backgroundColor: colorPalette.background,
                 overflow: "scroll",
             },
+            text: {
+                color: colorPalette.text,
+            }
         }
+
+        const dT = dText[lang];
 
         return (
             <div className="overall animation" style={styles.background}>
-                <div className="panel-nav" style={styles.title}>
-                    <h2>CONTROL PANEL / {title.toUpperCase()}</h2>
-                </div>
+                <div className="big-guy-padding">
+                    <div className="panel-nav" style={styles.title}>
+                        <h2>{dT.control_panel} / {dT[title.toLowerCase()].toUpperCase()}</h2>
+                    </div>
 
-                <div className="as-footer">
-                    <Link 
-                        to={"/cpanel"}
-                        className="panel-section-border button"
-                        style={styles.button}
-                    >
-                        Go back to Control Panel
-                    </Link>
+                    <div className="as-footer">
+                        <Link
+                            to={"/cpanel"}
+                            className="panel-section-border button"
+                            style={styles.button}
+                        >
+                            { dT.go_panel }
+                        </Link>
+                    </div>
+
+                    {this.getCards(title, (title === "items" ? items : categories), styles)}
                 </div>
-                
-                {this.getCards(title, (title === "items" ? items : categories))}
-                
             </div>
         )
     }
@@ -334,6 +359,7 @@ const mapDispatchtoProps = (dispatch) => {
         editCategory: (id, obj) => dispatch(editCategory(id, obj)),
         deleteCategory: (id) => dispatch(deleteCategory(id)),
         getMenuConfig: (id) => dispatch(getMenuConfig(id)),
+        getLanguage: (id) => dispatch(getLanguage(id)),
     }
 }
 

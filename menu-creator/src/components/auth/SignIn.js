@@ -31,8 +31,6 @@ class SignIn extends Component {
     render() {
         const {authError, auth} = this.props;
 
-        const lang = "spanish"
-
         // const bText = require('../../config/language');
 
         if (auth.uid) return <Redirect to="/cpanel" />

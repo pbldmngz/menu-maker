@@ -61,10 +61,3 @@ export const signUp = (newUser) => {
         });
     }
 }
-
-const createDateBefore = () => {
-    var oneMonth = new Date()
-    oneMonth.setDate(oneMonth.getDate() - 30)
-
-    return oneMonth
-}

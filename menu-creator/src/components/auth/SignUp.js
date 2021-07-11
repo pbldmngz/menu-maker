@@ -27,19 +27,9 @@ class SignUp extends Component {
     }
 
     render() {
-        const { auth, authError, profile, lang, userLevel } = this.props;
+        const { auth, authError } = this.props;
         
-
         if (auth.uid) return <Redirect to={"/menu/" + auth.uid} />
-
-        // if (!profile.canSee) return null;
-
-        // if (!profile.isAdmin) return null;
-        // if (userLevel && userLevel !==0) return <Redirect to="/" />
-
-        // const bText = require('../../config/language');
-
-        // if (!lang) return null;
 
         return (
             <div className="center-box">

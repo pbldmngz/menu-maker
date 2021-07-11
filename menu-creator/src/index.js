@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'react-notifications/lib/notifications.css';
 import App from './App';
 
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './store/reducers/rootReducer'
 import { Provider, useSelector } from 'react-redux'
 import thunk from 'redux-thunk'

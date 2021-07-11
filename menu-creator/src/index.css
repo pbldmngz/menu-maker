@@ -110,7 +110,7 @@ h1 {
 }
 
 .logo {
-  width: 150px;
+  height: 128px;
   margin: 5px;
 }
 
@@ -476,4 +476,14 @@ h1 {
 .cancel {
   background-color: brown;
   color: white;
+}
+
+.big-guy-padding {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.small-guy-padding {
+  margin-left: 5px;
+  margin-right: 5px;
 }

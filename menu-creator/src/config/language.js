@@ -1,0 +1,108 @@
+export const dText = {
+    es: {
+        control_panel: 'PANEL DE CONTROL',
+        go_menu: 'Ver menú',
+        menu: 'MENÚ',
+        categories: 'Categorías',
+        items: 'Catálogo',
+        settings: 'CONFIGURACIÓN',
+        display_name: 'Cambiar título',
+        web_address: 'Cambiar dirección web',
+        brand_logo: 'Cambiar logo',
+        user: 'USUARIO',
+        share_link: 'Compartir',
+        language: 'Cambiar idioma',
+        logout: 'Cerrar sesión',
+        colors: 'COLORES',
+        background: 'Fondo',
+        container: 'Contenedor',
+        highlight: 'Resaltes',
+        text: 'Texto',
+        reset: 'Reestablecer colores',
+
+        go_panel: 'Volver al panel de control',
+
+        a_name: 'Nombre',
+        a_price: 'Precio',
+        a_category: 'Selecciona su categoría',
+        a_desc: 'Descripción',
+        add: 'Agregar',
+        edit: 'Editar',
+        save: 'Guardar',
+        added: 'agregado',
+        edited: 'editado',
+
+        you_sure: '¿Estás seguro?',
+        no_revert: 'Esta acción no puede deshacerse',
+        yes_delete: 'Eliminar',
+        cancel: 'Cancelar',
+        deleted: 'Eliminado',
+        del_info: 'Se elimino correctamente',
+        ok: 'OK',
+
+        simple_input: {
+            display_name: "Título",
+            web_address: "Dirección web",
+            image_url: "URL de la imagen",
+
+            change: "Cambiar",
+
+            change_success: "Cambiado exitosamente!",
+            error: "No fue posible cambiar",
+            text: "Esta dirección web ya está tomada",
+        }
+    },
+    en: {
+        control_panel: 'CONTROL PANEL',
+        go_menu: 'Go to your menu',
+        menu: 'MENU',
+        categories: 'Categories',
+        items: 'Catalog',
+        settings: 'SETTINGS',
+        display_name: 'Change title',
+        web_address: 'Change web address',
+        brand_logo: 'Change logo',
+        user: 'USER',
+        share_link: 'Share',
+        language: 'Change language',
+        logout: 'Log out',
+        colors: 'COLORS',
+        background: 'Background',
+        container: 'Container',
+        highlight: 'Highlight',
+        text: 'Text',
+        reset: 'Reset colors',
+
+        go_panel: 'Go back to control panel',
+
+        a_name: 'Name',
+        a_price: 'Price',
+        a_category: 'Select category',
+        a_desc: 'Description',
+        add: 'Add',
+        edit: 'Edit',
+        save: 'Save',
+        added: 'added',
+        edited: 'edited',
+
+        you_sure: 'Are you sure?',
+        no_revert: 'This action cannot be reverted',
+        yes_delete: 'Yes, delete!',
+        cancel: 'Cancel',
+        deleted: 'Deleted!',
+        del_info: 'Data deleted successfully!',
+        ok: 'OK',
+
+        simple_input: {
+            display_name: "Title",
+            web_address: "Web address",
+            image_url: "Image URL",
+
+            change: "Change",
+
+            change_success: "Changed successfully!",
+            error: "Couldn't change",
+            text: "This address is already taken",
+        }
+    },
+}

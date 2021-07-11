@@ -1,3 +1,40 @@
+// Language!
+export const getLanguage = (uid) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+
+        const firestore = getFirestore();
+
+        var docRef = firestore.collection("language").doc(uid);
+
+        return docRef.get()
+            .then((doc) => {
+                if (doc.exists) {
+                    return doc.data()
+                }
+            }).catch((err) => {
+                console.log(err)
+            });
+    }
+}
+
+
+export const editLanguage = (id, newLang) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+
+        const firestore = getFirestore();
+
+        firestore.collection("language").doc(id).update({
+            lang: newLang,
+        }).then(() => {
+            dispatch({ type: "EDIT_LANG" }, newLang)
+        }).catch((err) => {
+            dispatch({ type: "EDIT_LANG_ERROR" }, err)
+        })
+
+    }
+}
+
+
 // Item
 export const createItem = (item) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -64,7 +101,6 @@ export const getItem = (id) => {
 export const createCategory = (category) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firestore = getFirestore();
-        const profile = getState().firebase.profile;
         const authorId = getState().firebase.auth.uid;
 
         firestore.collection("categories").add({

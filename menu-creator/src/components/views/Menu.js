@@ -121,22 +121,24 @@ class Menu extends Component {
             }
             return (
                 <div className="overall animation" style={styles.background}>
-                    <Navbar data={this.state.config} navbar={styles.title}/>
-                    <ResponsiveMasonry
-                        columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
-                    >
-                        <Masonry>
-                            {testItems && testItems.map((items, index) => {
-                                return <CategoryItems
-                                    key={index}
-                                    items={items}
-                                    category={styles.category}
-                                    separator={styles.separator}
+                    <div className="big-guy-padding">
+                        <Navbar data={this.state.config} navbar={styles.title} />
+                        <ResponsiveMasonry
+                            columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+                        >
+                            <Masonry>
+                                {testItems && testItems.map((items, index) => {
+                                    return <CategoryItems
+                                        key={index}
+                                        items={items}
+                                        category={styles.category}
+                                        separator={styles.separator}
                                     />
-                            })}
-                        </Masonry>
-                    </ResponsiveMasonry>
-                    <Footer />
+                                })}
+                            </Masonry>
+                        </ResponsiveMasonry>
+                        <Footer />
+                    </div>
                 </div>
             )
 

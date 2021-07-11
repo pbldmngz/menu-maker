@@ -13,7 +13,7 @@ const CategoryItems = (props) => {
             
             {items && items.data.map((obj, index) => {
                 return (
-                    <div className="item-container item-margin-bottom" key={index}>
+                    <div className="item-container item-margin-bottom small-guy-padding" key={index}>
                         <div className="item-name">{obj.name}</div>
                         <div className="item-price">{"$" + obj.price}</div>
                         <div className="item-description">{obj.description}</div>
