@@ -159,7 +159,9 @@ class PanelItems extends Component {
                     ...sendObj,
                     visible: !obj.visible,
                 }
-            )
+            ).then((res) => {
+                this.fetchData();
+            });
         } else {
             this.props.editCategory(
                 obj.id,
@@ -167,20 +169,22 @@ class PanelItems extends Component {
                     ...sendObj,
                     visible: !obj.visible,
                 }
-            )
+            ).then((res) => {
+                this.fetchData();
+            });
         }
-
-        this.fetchData()
     }
 
     delete = (title, id) => {
         if (title === "items") {
-            this.props.deleteItem(id)
+            this.props.deleteItem(id).then((res) => {
+                this.fetchData();
+            });
         } else {
-            this.props.deleteCategory(id)
+            this.props.deleteCategory(id).then((res) => {
+                this.fetchData();
+            });
         }
-
-        this.fetchData()
     }
 
     getCards = (title, data, styles) => {

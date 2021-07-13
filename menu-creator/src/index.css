@@ -111,6 +111,7 @@ h1 {
 
 .logo {
   height: 128px;
+  width: auto;
   margin: 5px;
 }
 
@@ -126,6 +127,7 @@ h1 {
 @media screen and (max-width: 900px) {
   .logo {
     width: 75px;
+    width: auto;
     margin: 5px;
   }
 
@@ -356,11 +358,15 @@ h1 {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #262626;
+  /* background-color: #262626; */
   text-align: right;
   font-weight: 200;
   font-size: 12px;
   padding: 1px;
+}
+
+.footer-circle {
+  background-color: #2626264f;
 }
 
 .as-footer {
@@ -486,4 +492,65 @@ h1 {
 .small-guy-padding {
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.absolute-center {
+  position: absolute;
+  background-color: #262626;
+  top: 30%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.small-text {
+  margin: 0px;
+  padding: 0px;
+  font-size: small;
+}
+
+.margin-top {
+  margin-top: 15px;
+}
+
+.color-yellow {
+  color: #e2b22b;
+}
+
+.color-white {
+  color: beige;
+}
+
+.big-title {
+  font-size : clamp(2rem, 10vw, 5rem);
+}
+
+.basic {
+	/* font-family: '     ', cursive; */
+	/* background: #fffdf5; */
+  background-color: #262626;
+	/* color: #3f3f5a; */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+  text-align: justify;
+  /* padding: 30px; */
+}
+
+.image-100 {
+  width: 100%;
+  border-radius: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+li::before {content: "•"; color: #e2b22b;
+  display: inline-block; width: 1em;
+  margin-left: -1em}
+
+.small-padding {
+  padding: 10px;
 }

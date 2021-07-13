@@ -59,7 +59,7 @@ export const editItem = (id, item) => {
 
         const firestore = getFirestore();
 
-        firestore.collection("items").doc(id).update({
+        return firestore.collection("items").doc(id).update({
             ...item,
         }).then(() => {
             dispatch({ type: "EDIT_ITEM" }, item)
@@ -75,7 +75,7 @@ export const deleteItem = (id) => {
 
         const firestore = getFirestore();
 
-        firestore.collection("items").doc(id).delete();
+        return firestore.collection("items").doc(id).delete();
     }
 }
 
@@ -121,7 +121,7 @@ export const editCategory = (id, category) => {
 
         const firestore = getFirestore();
 
-        firestore.collection("categories").doc(id).update({
+        return firestore.collection("categories").doc(id).update({
             ...category,
         }).then(() => {
             dispatch({ type: "EDIT_CATEGORY" }, category)
@@ -137,7 +137,7 @@ export const deleteCategory = (id) => {
 
         const firestore = getFirestore();
 
-        firestore.collection("categories").doc(id).delete();
+        return firestore.collection("categories").doc(id).delete();
     }
 }
 

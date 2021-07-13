@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {signIn} from '../../store/actions/authActions'
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 // import ReactDOM from 'react-dom'
 
 
@@ -36,45 +37,36 @@ class SignIn extends Component {
         if (auth.uid) return <Redirect to="/cpanel" />
         
         return (
-            <div className="center-box">
-                <div className="category-container category-padding-full">
-
-                        <form className="" onSubmit={this.handleSubmit}>
-                            <center>
-                                <div className="popup-input panel-nav panel-section-border letter-spacing force-white-text">
-                                    LOGIN
-                                </div>
-
-                                <input
-                                    onKeyDown={(e) => this.listenEnter(e)}
-                                    type="email"
-                                    id='email'
-                                    placeholder="Correo"
-                                    onChange={this.handleChange}
-                                    className="popup-input"
-                                />
-
-                                <input
-                                    onKeyDown={(e) => this.listenEnter(e)}
-                                    type="password"
-                                    id='password'
-                                    placeholder="Contraseña"
-                                    onChange={this.handleChange}
-                                    className="popup-input"
-                                />
-
-                                <button className="popup-input action-button button">Sign In</button>
-
-                                <div className="">
-                                    {authError ? <p>{authError}</p> : null}
-                                </div>
-
-                            </center>
-                        </form>
-
-                </div>
+            <div className="absolute-center category-container category-padding-full">
+                <form className="" onSubmit={this.handleSubmit}>
+                    <center>
+                        <div className="popup-input panel-nav panel-section-border letter-spacing force-white-text">
+                            LOGIN
+                        </div>
+                        <input
+                            onKeyDown={(e) => this.listenEnter(e)}
+                            type="email"
+                            id='email'
+                            placeholder="Correo"
+                            onChange={this.handleChange}
+                            className="popup-input"
+                        />
+                        <input
+                            onKeyDown={(e) => this.listenEnter(e)}
+                            type="password"
+                            id='password'
+                            placeholder="Contraseña"
+                            onChange={this.handleChange}
+                            className="popup-input"
+                        />
+                        <button className="popup-input action-button button">Sign In</button>
+                        <div className="">
+                            {authError ? <p>{authError}</p> : null}
+                        </div>
+                        <Link to="/auth/register" className="small-text color-yellow margin-top ">Do not have an account ? Sign Up</Link>
+                    </center>
+                </form>
             </div>
-            
         )
     }
 }

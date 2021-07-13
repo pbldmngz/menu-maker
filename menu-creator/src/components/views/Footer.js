@@ -11,7 +11,7 @@ function Footer(props) {
         <div className="">
             <footer className="footer">
                 {auth.uid ? (
-                    <div>
+                    <div className="footer-circle">
                         <div className="material-icons button" onClick={() => {
                             props.history.push("/cpanel")
                         }}>
@@ -24,7 +24,12 @@ function Footer(props) {
                         </div>
                     </div>
                 ) : (
-                    <div>
+                    <div className="footer-circle">
+                        <div className="material-icons button" onClick={() => {
+                            props.history.push("/")
+                        }}>
+                            home
+                        </div>
                         <div className="material-icons button" onClick={() => {
                             props.history.push("/auth/register")
                         }}>
@@ -33,7 +38,7 @@ function Footer(props) {
                         <div className="material-icons button" onClick={() => {
                             props.history.push("/auth/login")
                         }}>
-                            home
+                            tune
                         </div>
                     </div>
                 )}
